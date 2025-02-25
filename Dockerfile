@@ -8,6 +8,4 @@ RUN pip install -r requirements.txt
 
 WORKDIR myproject
 
-EXPOSE 8001
-
 CMD ["gunicorn", "--bind", "0.0.0.0:8001", "myproject.wsgi"]
