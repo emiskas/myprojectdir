@@ -74,14 +74,16 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import os
+
 DATABASES = {
     "default": {
-        "NAME": "test_db",
         "ENGINE": "django.db.backends.postgresql",
-        "USER": "test_user",
-        "PASSWORD": "test_password",
-        "PORT": 5432,
-        "HOST": "localhost",
+        "NAME": os.getenv("POSTGRES_DB", "test_db"),
+        "USER": os.getenv("POSTGRES_USER", "test_user"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "test_password"),
+        "HOST": os.getenv("POSTGRES_HOST", "postgres"),
+        "PORT": os.getenv("POSTGRES_PORT", "5432"),
     }
 }
 
@@ -121,7 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 import os
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = "static/"
 
 # Default primary key field type
